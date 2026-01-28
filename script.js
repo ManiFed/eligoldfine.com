@@ -7,7 +7,8 @@ const mainSite = document.getElementById('mainSite');
 let linesWidth, linesHeight;
 let lines = [];
 let animationStartTime;
-const ANIMATION_DURATION = 4000; // 4 seconds before transition
+let globalTime = 0;
+const ANIMATION_DURATION = 3000; // 3 seconds before transition
 
 function resizeLinesCanvas() {
     linesWidth = window.innerWidth;
@@ -16,81 +17,111 @@ function resizeLinesCanvas() {
     linesCanvas.height = linesHeight;
 }
 
-class Line {
-    constructor() {
-        this.reset();
+class CurvedLine {
+    constructor(index, total) {
+        const centerY = linesHeight / 2;
+
+        // Cluster lines around the center vertically with gaussian-like distribution
+        const spread = 0.35; // How spread out the lines are (0-1, lower = more clustered)
+        const gaussianRandom = () => {
+            let u = 0, v = 0;
+            while (u === 0) u = Math.random();
+            while (v === 0) v = Math.random();
+            return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+        };
+
+        // Distribute lines with clustering toward center
+        this.baseY = centerY + gaussianRandom() * linesHeight * spread;
+
+        // Offset for wave animation
+        this.phaseOffset = Math.random() * Math.PI * 2;
+
+        // Speed of horizontal movement (very slow)
+        this.speed = 0.15 + Math.random() * 0.25;
+
+        // Direction: some lines go left, some go right
+        this.direction = Math.random() > 0.5 ? 1 : -1;
+
+        // Horizontal offset that changes over time
+        this.xOffset = Math.random() * linesWidth;
+
+        // Curvature amount - how much the line bends spherically
+        this.curvature = 0.08 + Math.random() * 0.12;
+
+        // Vertical wave amplitude
+        this.waveAmplitude = 3 + Math.random() * 6;
+
+        // Color - start with a random hue, will shift over time
+        this.baseHue = Math.random() * 360;
+        this.hueSpeed = 15 + Math.random() * 25; // How fast the color shifts
+        this.saturation = 60 + Math.random() * 30;
+        this.lightness = 50 + Math.random() * 20;
+
+        // Medium opacity - between subtle and intense
+        this.baseOpacity = 0.15 + Math.random() * 0.2;
+
+        // Line thickness
+        this.width = 0.5 + Math.random() * 1.5;
     }
 
-    reset() {
-        // Start from center
-        this.x = linesWidth / 2;
-        this.y = linesHeight / 2;
-
-        // Random angle from center
-        this.angle = Math.random() * Math.PI * 2;
-
-        // Speed varies
-        this.speed = 2 + Math.random() * 8;
-
-        // Line length
-        this.length = 50 + Math.random() * 200;
-
-        // Color variations - blues, purples, cyans, with some reds and greens
-        const colors = [
-            `hsla(${200 + Math.random() * 60}, 80%, 60%, `, // Blues/Cyans
-            `hsla(${270 + Math.random() * 40}, 70%, 50%, `, // Purples
-            `hsla(${180 + Math.random() * 40}, 70%, 50%, `, // Teals
-            `hsla(${350 + Math.random() * 20}, 70%, 50%, `, // Reds
-            `hsla(${100 + Math.random() * 40}, 60%, 50%, `, // Greens
-        ];
-        this.colorBase = colors[Math.floor(Math.random() * colors.length)];
-
-        // Opacity
-        this.opacity = 0.3 + Math.random() * 0.5;
-
-        // Width
-        this.width = 1 + Math.random() * 2;
-
-        // Distance traveled
-        this.distance = 0;
-        this.maxDistance = Math.max(linesWidth, linesHeight) * 0.8;
-    }
-
-    update() {
-        // Move outward from center
-        this.distance += this.speed;
-
-        // Calculate position based on angle and distance
+    draw(time) {
         const centerX = linesWidth / 2;
         const centerY = linesHeight / 2;
 
-        this.x = centerX + Math.cos(this.angle) * this.distance;
-        this.y = centerY + Math.sin(this.angle) * this.distance;
+        // Slowly move the line horizontally
+        this.xOffset += this.speed * this.direction;
 
-        // Reset if off screen or max distance reached
-        if (this.distance > this.maxDistance ||
-            this.x < -100 || this.x > linesWidth + 100 ||
-            this.y < -100 || this.y > linesHeight + 100) {
-            this.reset();
-            this.distance = 0;
-        }
-    }
-
-    draw() {
-        // Calculate tail position (toward center)
-        const tailX = this.x - Math.cos(this.angle) * this.length;
-        const tailY = this.y - Math.sin(this.angle) * this.length;
-
-        // Create gradient for the line
-        const gradient = linesCtx.createLinearGradient(tailX, tailY, this.x, this.y);
-        gradient.addColorStop(0, this.colorBase + '0)');
-        gradient.addColorStop(0.5, this.colorBase + this.opacity + ')');
-        gradient.addColorStop(1, this.colorBase + (this.opacity * 0.8) + ')');
+        // Wrap around
+        if (this.xOffset > linesWidth + 200) this.xOffset = -200;
+        if (this.xOffset < -200) this.xOffset = linesWidth + 200;
 
         linesCtx.beginPath();
-        linesCtx.moveTo(tailX, tailY);
-        linesCtx.lineTo(this.x, this.y);
-        linesCtx.strokeStyle = gradient;
+
+        // Draw a curved horizontal line with spherical distortion
+        const segments = 120;
+        const lineLength = linesWidth * 1.8;
+
+        for (let i = 0; i <= segments; i++) {
+            const t = i / segments;
+
+            // Base x position across the line
+            const baseX = (t - 0.5) * lineLength + this.xOffset;
+
+            // Calculate distance from center for spherical curve
+            const dx = baseX - centerX;
+            const normalizedDx = dx / (linesWidth * 0.5);
+
+            // Spherical curvature - lines bend away from center creating globe effect
+            const sphereFactor = Math.max(0, 1 - normalizedDx * normalizedDx);
+            const sphericalOffset = Math.sqrt(sphereFactor) * this.curvature * linesHeight;
+
+            // Gentle wave motion
+            const wave = Math.sin(time * 0.0004 + this.phaseOffset + t * Math.PI * 3) * this.waveAmplitude;
+
+            // Determine if line is above or below center
+            const aboveCenter = this.baseY < centerY;
+
+            // Final y position - curve away from center
+            const y = this.baseY + sphericalOffset * (aboveCenter ? -1 : 1) * 0.4 + wave;
+
+            // Fade out at horizontal edges
+            const edgeFade = Math.pow(sphereFactor, 0.5);
+
+            if (i === 0) {
+                linesCtx.moveTo(baseX, y);
+            } else {
+                linesCtx.lineTo(baseX, y);
+            }
+        }
+
+        // Calculate opacity with subtle pulsing
+        const pulse = Math.sin(time * 0.0008 + this.phaseOffset) * 0.03;
+        const opacity = Math.max(0.05, this.baseOpacity + pulse);
+
+        // Color shifts over time
+        const currentHue = (this.baseHue + time * 0.01 * this.hueSpeed / 100) % 360;
+
+        linesCtx.strokeStyle = `hsla(${currentHue}, ${this.saturation}%, ${this.lightness}%, ${opacity})`;
         linesCtx.lineWidth = this.width;
         linesCtx.lineCap = 'round';
         linesCtx.stroke();
@@ -99,37 +130,53 @@ class Line {
 
 function initLines() {
     lines = [];
-    // Create many lines
-    for (let i = 0; i < 150; i++) {
-        const line = new Line();
-        // Stagger initial distances
-        line.distance = Math.random() * line.maxDistance;
-        lines.push(line);
+    // Create horizontal curved lines clustered around center
+    const numLines = 80;
+    for (let i = 0; i < numLines; i++) {
+        lines.push(new CurvedLine(i, numLines));
     }
 }
 
 function animateLines(timestamp) {
     if (!animationStartTime) animationStartTime = timestamp;
     const elapsed = timestamp - animationStartTime;
+    globalTime = timestamp;
 
-    // Clear canvas with slight fade for trail effect
-    linesCtx.fillStyle = 'rgba(10, 10, 10, 0.15)';
+    // Clear canvas completely for clean lines
+    linesCtx.fillStyle = 'rgba(10, 10, 10, 1)';
     linesCtx.fillRect(0, 0, linesWidth, linesHeight);
 
-    // Update and draw all lines
+    // Draw all curved lines
     for (const line of lines) {
-        line.update();
-        line.draw();
+        line.draw(globalTime);
     }
 
-    // Add glow in center
-    const gradient = linesCtx.createRadialGradient(
-        linesWidth / 2, linesHeight / 2, 0,
-        linesWidth / 2, linesHeight / 2, 200
+    // Add glowing aura around the center cluster
+    const centerX = linesWidth / 2;
+    const centerY = linesHeight / 2;
+    const glowRadius = Math.min(linesWidth, linesHeight) * 0.5;
+
+    // Outer soft glow
+    const outerGlow = linesCtx.createRadialGradient(
+        centerX, centerY, 0,
+        centerX, centerY, glowRadius * 1.2
     );
-    gradient.addColorStop(0, 'rgba(124, 58, 237, 0.1)');
-    gradient.addColorStop(1, 'rgba(124, 58, 237, 0)');
-    linesCtx.fillStyle = gradient;
+    outerGlow.addColorStop(0, 'rgba(100, 120, 255, 0.08)');
+    outerGlow.addColorStop(0.3, 'rgba(130, 80, 200, 0.05)');
+    outerGlow.addColorStop(0.6, 'rgba(80, 100, 180, 0.02)');
+    outerGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    linesCtx.fillStyle = outerGlow;
+    linesCtx.fillRect(0, 0, linesWidth, linesHeight);
+
+    // Inner brighter glow
+    const innerGlow = linesCtx.createRadialGradient(
+        centerX, centerY, 0,
+        centerX, centerY, glowRadius * 0.6
+    );
+    innerGlow.addColorStop(0, 'rgba(150, 140, 255, 0.06)');
+    innerGlow.addColorStop(0.5, 'rgba(120, 100, 200, 0.03)');
+    innerGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    linesCtx.fillStyle = innerGlow;
     linesCtx.fillRect(0, 0, linesWidth, linesHeight);
 
     // Continue animation until duration is reached
