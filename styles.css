@@ -164,17 +164,17 @@ body {
 }
 
 .section {
-    padding: 6rem 0;
-    min-height: 60vh;
+    padding: 4rem 0;
 }
 
 .hero {
-    min-height: 100vh;
+    min-height: 70vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding-top: 4rem;
 }
 
 .hero h1 {
@@ -198,19 +198,19 @@ body {
 }
 
 .section-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 600;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     position: relative;
 }
 
 .section-title::after {
     content: '';
     position: absolute;
-    bottom: -0.5rem;
+    bottom: -0.4rem;
     left: 0;
-    width: 60px;
-    height: 3px;
+    width: 50px;
+    height: 2px;
     background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink));
     border-radius: 2px;
 }
@@ -218,20 +218,20 @@ body {
 /* Cards */
 .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
 }
 
 .card {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
-    border-radius: 16px;
-    padding: 2rem;
+    border-radius: 12px;
+    padding: 1.5rem;
     transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
     border-color: var(--accent-purple);
 }
 
@@ -239,28 +239,42 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .card h3 {
-    font-size: 1.3rem;
+    font-size: 1.15rem;
     font-weight: 600;
 }
 
 .date {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--text-muted);
+    white-space: nowrap;
 }
 
 .company {
     color: var(--accent-purple);
     font-weight: 500;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
 }
 
 .card p {
     color: var(--text-muted);
-    line-height: 1.6;
+    line-height: 1.5;
+    font-size: 0.9rem;
+}
+
+.card a {
+    color: var(--accent-pink);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.card a:hover {
+    color: var(--accent-purple);
+    text-decoration: underline;
 }
 
 /* Tags */
@@ -419,7 +433,8 @@ body {
 
 /* Footer */
 .footer {
-    padding: 3rem 0;
+    padding: 2rem 0;
+    margin-top: 2rem;
     border-top: 1px solid var(--card-border);
     display: flex;
     justify-content: space-between;
@@ -430,18 +445,18 @@ body {
 
 .footer p {
     color: var(--text-muted);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 .social-links {
     display: flex;
-    gap: 1.5rem;
+    gap: 1.25rem;
 }
 
 .social-link {
     color: var(--text-muted);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     transition: color 0.3s ease;
 }
 
@@ -464,7 +479,16 @@ body {
     }
 
     .section {
-        padding: 4rem 0;
+        padding: 3rem 0;
+    }
+
+    .hero {
+        min-height: 60vh;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
 
     .footer {
