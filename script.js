@@ -183,10 +183,41 @@ function animateLines(timestamp) {
     if (elapsed < ANIMATION_DURATION) {
         requestAnimationFrame(animateLines);
     } else {
-        // Transition to main site
-        transitionToMainSite();
+        // Fade lines out, then start observatory animation
+        startObservatorySequence();
     }
 }
+
+function startObservatorySequence() {
+    // Fade out the landing name text
+    const landingContent = document.querySelector('.landing-content');
+    if (landingContent) landingContent.style.opacity = '0';
+
+    // Show skip hint
+    const skipHint = document.getElementById('skipHint');
+    if (skipHint) skipHint.classList.add('visible');
+
+    // Start observatory animation on the same canvas
+    ObservatoryAnimation.start(linesCanvas, function () {
+        // Hide skip hint and transition to main site
+        if (skipHint) skipHint.classList.remove('visible');
+        transitionToMainSite();
+    });
+}
+
+// Skip on click/tap/key during observatory animation
+function skipObservatory() {
+    const skipHint = document.getElementById('skipHint');
+    if (skipHint && skipHint.classList.contains('visible')) {
+        ObservatoryAnimation.skip();
+    }
+}
+document.addEventListener('click', skipObservatory);
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' || e.key === ' ' || e.key === 'Enter') {
+        skipObservatory();
+    }
+});
 
 function transitionToMainSite() {
     landing.classList.add('hidden');
@@ -310,6 +341,11 @@ window.addEventListener('resize', () => {
     // Reinitialize dots if on main site
     if (mainSite.classList.contains('visible')) {
         initDots();
+    }
+
+    // Resize observatory animation if running
+    if (typeof ObservatoryAnimation !== 'undefined') {
+        ObservatoryAnimation.resize();
     }
 });
 

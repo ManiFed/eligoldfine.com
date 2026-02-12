@@ -47,6 +47,24 @@ body {
     pointer-events: none;
 }
 
+.skip-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.05em;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    pointer-events: none;
+}
+
+.skip-hint.visible {
+    opacity: 1;
+}
+
 #linesCanvas {
     position: absolute;
     top: 0;
@@ -62,6 +80,7 @@ body {
     opacity: 0;
     animation: fadeInUp 1s ease forwards;
     animation-delay: 0.5s;
+    transition: opacity 0.8s ease;
 }
 
 @keyframes fadeInUp {
