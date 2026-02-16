@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eli Goldfine</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landing" class="landing">
+        <canvas id="linesCanvas"></canvas>
+        <div class="landing-content">
+            <h1 class="name">Eli Goldfine</h1>
+        </div>
+        <div id="skipHint" class="skip-hint">Click or press any key to skip</div>
+    </div>
+
+    <!-- Main Site -->
+    <div id="mainSite" class="main-site">
+        <canvas id="dotsCanvas"></canvas>
+
+        <nav class="nav">
+            <div class="nav-brand">Eli Goldfine</div>
+            <ul class="nav-links">
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <section id="hero" class="section hero">
+                <h1>Hello, I'm <span class="highlight">Eli Goldfine</span></h1>
+                <p class="hero-subtitle">Exploring the cosmos, predicting the future, and building with AI</p>
+            </section>
+
+            <section id="experience" class="section">
+                <h2 class="section-title">Experience</h2>
+                 <div class="cards">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Founder</h3>
+                            <span class="date">2026 - Present</span>
+                        </div>
+                        <p class="company">Psychophant</p>
+                        <p>I created <a href=psychophant.xyz>Psychophant</a>, a competitive AI debate arena. Launched late-Feb 2026. Stats coming soon, check it out!</p>
+                    </div>
+                <div class="cards">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Advisory Board</h3>
+                            <span class="date">2023 - Present</span>
+                        </div>
+                        <p class="company">Westchester Amateur Astronomers</p>
+                        <p>I've served on WAA's advisory board since 2023. 
+                            Over that time, I've revamped their website at 
+                            <a href=westchesterastronomers.org>westchesterastronomers.org</a>, planned events for the club, and organized large outreach events across Westchester County.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Associate Member</h3>
+                            <span class="date">2024 - Present</span>
+                        </div>
+                        <p class="company">Springfield Telescope Makers</p>
+                        <p>The Springfield Telescope Makers run the annual Stellafane Convention, known for leading the world in amateur telescope making since 1923.
+                            I've helped lead various events at convention and in 2024 I was nominated to be one of their ~100 members worldwide. </p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="projects" class="section">
+                <h2 class="section-title">Stuff I've Done</h2>
+                <div class="cards">
+                    
+                <div class="card project-card">
+                    <h3>Skyscope Restoration</h3>
+                    <p>I restored an ~80 year old Skyscope reflector, winning the Antique Restoration Award and First Place Junior award at the 87th Stellafane convention.</p>    
+                </div>
+                <div class="card project-card">
+                    <h3>GEM Telescope Restoration</h3>
+                    <p>I restored a home-built reflecting telescope on a German Equatorial Mount, winning the Special Award for a Junior Project at the 88th Stellafane convention.</p>
+                </div>
+                <div class="card project-card">
+                    <h3>ManiFed</h3>
+                    <p>Co-founded a P2P lending system and trading terminal for Manifold Markets with <a href="rjmccomb.xyz">Ryan McComb</a>.</p>
+                </div>
+                <div class="card project-card">
+                    <h3>Substacks</h3>
+                    <p>Wrote some blog posts about <a href=itsnotgambling.substack.com>prediction markets</a> and <a href=magnitudezero.substack.com>astronomy</a>.</p>
+                </div>
+                <div class="card project-card">
+                    <h3>ScopeTrader</h3>
+                    <p>Wrote the cover story for a magazine with 120,000+ readers in <a href=scopetrader.com/magazine/november-2025>November '25</a>.</p>
+                </div>
+                <div class="card project-card">
+                    <h3>Journalism</h3>
+                    <p>An article I wrote for my middle school newspaper won second place in a national contest. It was an exposé on the markup the school's snack shop adds to the goods they obtain.</p>
+                </div>
+                </div>
+            </section>
+
+            <footer class="footer">
+                <p>&copy; 2024 Eli Goldfine. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">GitHub</a>
+                    <a href="#" class="social-link">LinkedIn</a>
+                    <a href="#" class="social-link">Twitter</a>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <script src="observatory.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
