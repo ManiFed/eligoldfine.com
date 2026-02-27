@@ -4,9 +4,11 @@ const linesCtx = linesCanvas.getContext('2d');
 const landing = document.getElementById('landing');
 const mainSite = document.getElementById('mainSite');
 const skipHint = document.getElementById('skipHint');
+const introProgressFill = document.getElementById('introProgressFill');
 
 let linesWidth, linesHeight;
 const INTRO_DURATION = 5500;
+const OBSERVATORY_DURATION = 32000;
 let introStartTime = null;
 let lastIntroTimestamp = null;
 let introNodes = [];
@@ -18,6 +20,13 @@ let skipRequested = false;
 let observatoryStarted = false;
 let skipHandlersAttached = false;
 let dotsAnimationRunning = false;
+let observatoryProgressInterval = null;
+
+
+function updateIntroProgress(progress) {
+    if (!introProgressFill) return;
+    introProgressFill.style.width = `${Math.max(0, Math.min(progress, 1)) * 100}%`;
+}
 
 function resizeLinesCanvas() {
     linesWidth = window.innerWidth;
@@ -47,6 +56,11 @@ function revealMainSite() {
     landingSequenceFinished = true;
     skipRequested = true;
     if (skipHint) skipHint.classList.remove('visible');
+    updateIntroProgress(1);
+    if (observatoryProgressInterval) {
+        clearInterval(observatoryProgressInterval);
+        observatoryProgressInterval = null;
+    }
     removeSkipListeners();
 
     landing?.classList.add('hidden');
@@ -90,11 +104,28 @@ function startObservatorySequence() {
     }
 
     resizeLinesCanvas();
+    const observatoryStart = performance.now();
+    observatoryProgressInterval = setInterval(() => {
+        const elapsed = performance.now() - observatoryStart;
+        const totalProgress = (INTRO_DURATION + elapsed) / (INTRO_DURATION + OBSERVATORY_DURATION);
+        updateIntroProgress(totalProgress);
+        if (landingSequenceFinished || totalProgress >= 1) {
+            clearInterval(observatoryProgressInterval);
+            observatoryProgressInterval = null;
+        }
+    }, 100);
+
     ObservatoryAnimation.start(linesCanvas, () => {
         if (!landingSequenceFinished) {
             revealMainSite();
         }
     });
+
+    setTimeout(() => {
+        if (!landingSequenceFinished) {
+            revealMainSite();
+        }
+    }, OBSERVATORY_DURATION + 1200);
 }
 
 class OrbitNode {
@@ -281,6 +312,9 @@ function animateLines(timestamp) {
     const delta = timestamp - lastIntroTimestamp;
     lastIntroTimestamp = timestamp;
     const progress = Math.min((timestamp - introStartTime) / INTRO_DURATION, 1);
+    const totalDuration = INTRO_DURATION + (typeof ObservatoryAnimation !== 'undefined' ? OBSERVATORY_DURATION : 0);
+    const elapsed = timestamp - introStartTime;
+    updateIntroProgress(Math.min(elapsed / totalDuration, 1));
 
     drawBackground(progress);
 
@@ -422,6 +456,7 @@ function setupNameReveal() {
 // Initialize
 function init() {
     setupNameReveal();
+    updateIntroProgress(0);
     resizeLinesCanvas();
     resizeDotsCanvas();
     initLines();

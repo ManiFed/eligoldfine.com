@@ -65,6 +65,28 @@ body {
     opacity: 1;
 }
 
+.intro-progress {
+    position: absolute;
+    bottom: 4.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(360px, 70vw);
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.15);
+    overflow: hidden;
+    z-index: 20;
+}
+
+.intro-progress-fill {
+    width: 0%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, rgba(124, 58, 237, 0.95), rgba(236, 72, 153, 0.95));
+    box-shadow: 0 0 12px rgba(124, 58, 237, 0.6);
+    transition: width 0.12s linear;
+}
+
 #linesCanvas {
     position: absolute;
     top: 0;
