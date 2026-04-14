@@ -8,7 +8,7 @@ const ObservatoryAnimation = (function () {
     let animFrameId = null;
     let skipped = false;
 
-    const DURATION = 3200;
+    const DURATION = 32000;
 
     // ── Utilities ──
     function lerp(a, b, t) { return a + (b - a) * t; }
