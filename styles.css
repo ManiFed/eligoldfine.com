@@ -10,7 +10,6 @@
 }
 
 * { box-sizing: border-box; }
-[hidden] { display: none !important; }
 
 body {
     margin: 0 auto;
@@ -26,7 +25,7 @@ a {
     text-decoration-thickness: 1px;
 }
 
-a:hover, button:hover { color: var(--accent); }
+a:hover { color: var(--accent); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
 
 .skip-link {
@@ -110,25 +109,6 @@ a:hover, button:hover { color: var(--accent); }
     background: #e4dcc8;
 }
 
-.film-trigger, .film button {
-    font: inherit;
-    cursor: pointer;
-}
-
-.film-trigger {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.65rem;
-    border: 0;
-    padding: 0.65rem 0 0;
-    background: transparent;
-    color: var(--muted);
-    font: 0.75rem/1.5 var(--mono);
-    text-align: left;
-}
-
-.film-trigger span { color: var(--accent); }
-
 .section {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
@@ -170,37 +150,12 @@ a:hover, button:hover { color: var(--accent); }
 .date { color: var(--muted); font: 0.75rem/1.5 var(--mono); }
 .read-link { display: inline-block; margin-top: 0.5rem; }
 
-#projects .entries {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: clamp(1.4rem, 4vw, 3rem);
-}
-
-#projects .entry:nth-child(2) { margin-top: 0; padding-top: 0; border-top: 0; }
-
 .footer {
     border-top: 1px solid var(--ink);
     padding: 1.5rem 0 2.5rem;
     font-size: 0.875rem;
 }
 .footer p { margin: 0; color: var(--muted); }
-
-.film {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    max-width: none;
-    max-height: none;
-    border: 0;
-    margin: 0;
-    padding: 0;
-    background: #0a0a0a;
-}
-
-.film canvas { display: block; }
-.film form { position: absolute; top: 1.25rem; right: 1.25rem; }
-.film button { padding: 0.45rem 0.75rem; border: 1px solid var(--line); background: var(--paper); }
 
 @media (max-width: 50rem) {
     .section { grid-template-columns: 1fr; }
@@ -212,12 +167,6 @@ a:hover, button:hover { color: var(--accent); }
     .site-header nav { font-size: 0.875rem; }
     .hero { grid-template-columns: 1fr; }
     .hero-visual { width: min(14rem, 80%); }
-    #projects .entries { grid-template-columns: 1fr; }
-    #projects .entry:nth-child(2) {
-        margin-top: 1.15rem;
-        padding-top: 1.15rem;
-        border-top: 1px solid var(--line);
-    }
 }
 
 @media (max-width: 24rem) {
