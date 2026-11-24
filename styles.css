@@ -150,6 +150,22 @@ a:hover { color: var(--accent); }
 .date { color: var(--muted); font: 0.75rem/1.5 var(--mono); }
 .read-link { display: inline-block; margin-top: 0.5rem; }
 
+.in-progress {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.9rem;
+    padding: 0.85rem 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 0.875rem;
+}
+
+.in-progress h2 {
+    margin: 0;
+    font: inherit;
+}
+
 .footer {
     border-top: 1px solid var(--ink);
     padding: 1.5rem 0 2.5rem;
