@@ -3,173 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Eli Goldfine’s projects in prediction markets, AI, and amateur astronomy.">
+    <meta name="theme-color" content="#f6f2e7">
     <title>Eli Goldfine</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="observatory.js" defer></script>
+    <script src="script.js" defer></script>
 </head>
-<body>
-    <!-- Landing Page -->
-    <div id="landing" class="landing">
-        <canvas id="linesCanvas"></canvas>
-        <div class="landing-content">
-            <h1 class="name">Eli Goldfine</h1>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+    <a class="wordmark" href="#top" aria-label="Eli Goldfine, top of page">EG</a>
+    <nav aria-label="Main navigation">
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#press">Press</a>
+    </nav>
+</header>
+
+<main id="main">
+    <section id="hero" class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+            <h1 id="hero-title">Eli Goldfine</h1>
+            <p>I’m in high school. I build with AI, work on prediction markets, and restore old telescopes.</p>
+            <div class="hero-links">
+                <a href="mailto:emgoldfine@gmail.com">Email <span aria-hidden="true">↗</span></a>
+                <a href="https://x.com/realTomBayes">X <span aria-hidden="true">↗</span></a>
+            </div>
         </div>
-        <div class="intro-progress" aria-hidden="true">
-            <div id="introProgressFill" class="intro-progress-fill"></div>
+        <div class="hero-visual">
+            <img class="hero-photo" src="hero-portrait.png" alt="Eli Goldfine" width="678" height="1004">
+            <button class="film-trigger" type="button" hidden>Play observatory short <span aria-hidden="true">▷</span></button>
         </div>
-        <div id="skipHint" class="skip-hint">Click or press any key to skip</div>
+    </section>
+
+    <section id="projects" class="section">
+        <h2 class="section-title">Stuff I've Done</h2>
+        <div class="entries">
+            <div class="entry">
+                <h3>Founder, argue.lol</h3>
+                <p>I created <a href="https://argue.lol">argue.lol</a>, a competitive AI debate arena.</p>
+            </div>
+            <div class="entry">
+                <h3>Founder, Invariant Studio</h3>
+                <p>I created <a href="https://invariant.markets">Invariant Studio</a>, a platform to design and test Automated Market Makers.</p>
+            </div>
+            <div class="entry">
+                <h3>Skyscope Restoration</h3>
+                <p>I restored an ~80 year old Skyscope reflector, winning the Antique Restoration Award and First Place Junior award at the 87th Stellafane convention.</p>
+            </div>
+            <div class="entry">
+                <h3>GEM Telescope Restoration</h3>
+                <p>I restored a home-built reflecting telescope on a German Equatorial Mount, winning the Special Award for a Junior Project at the 88th Stellafane convention.</p>
+            </div>
+            <div class="entry">
+                <h3>ManiFed</h3>
+                <p>Co-founded a P2P lending system and trading terminal for Manifold Markets with <a href="https://rjmccomb.xyz">Ryan McComb</a>.</p>
+            </div>
+            <div class="entry">
+                <h3>Magnitude Zero</h3>
+                <p>Wrote some blog posts about <a href="https://magnitudezero.substack.com">telescopes/astronomy</a>.</p>
+            </div>
+            <div class="entry">
+                <h3>ScopeTrader</h3>
+                <p>Wrote the cover story for a magazine with 120,000+ readers in <a href="https://scopetrader.com/magazine/november-2025">November '25</a>.</p>
+            </div>
+            <div class="entry">
+                <h3>Journalism</h3>
+                <p>An article I wrote for my middle school newspaper won second place in a national contest. It was an exposé on the markup the school's snack shop adds to the goods they obtain.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section">
+        <h2 class="section-title">Experience</h2>
+        <div class="entries">
+            <div class="entry">
+                <div class="entry-heading">
+                    <h3>New Media Fellow</h3>
+                    <span class="date">January 2027</span>
+                    <p class="company">Andreessen Horowitz</p>
+                </div>
+            </div>
+            <div class="entry">
+                <div class="entry-heading">
+                    <h3>Intern</h3>
+                    <span class="date">July 2026 - Present</span>
+                    <p class="company">MNX</p>
+                </div>
+                <p>Working on the growth team for the company building the derivatives layer for the AI economy.</p>
+            </div>
+            <div class="entry">
+                <div class="entry-heading">
+                    <h3>Writer</h3>
+                    <span class="date">February 2026 - Present</span>
+                    <p class="company">The Supercycle</p>
+                </div>
+                <p>Wrote some blog posts and did some podcasts about prediction markets. Find us at <a href="https://supercycle.blog">supercycle.blog</a></p>
+            </div>
+            <div class="entry">
+                <div class="entry-heading">
+                    <h3>Advisory Board</h3>
+                    <span class="date">2023 - Present</span>
+                    <p class="company">Westchester Amateur Astronomers</p>
+                </div>
+                <p>I've served on WAA's advisory board since 2023.
+                    Over that time, I've revamped their website at
+                    <a href="https://westchesterastronomers.org">westchesterastronomers.org</a>, planned events for the club, and organized large outreach events across Westchester County.</p>
+            </div>
+            <div class="entry">
+                <div class="entry-heading">
+                    <h3>Associate Member</h3>
+                    <span class="date">2024 - Present</span>
+                    <p class="company">Springfield Telescope Makers</p>
+                </div>
+                <p>The Springfield Telescope Makers run the annual Stellafane Convention, known for leading the world in amateur telescope making since 1923.
+                    I've helped lead various events at convention and in 2024 I was nominated to be one of their ~100 members worldwide.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="press" class="section">
+        <h2 class="section-title">Press</h2>
+        <div class="entries">
+            <div class="entry">
+                <div class="entry-heading">
+                    <h3>Featured in Business Insider</h3>
+                    <span class="date">2026</span>
+                    <p class="company">Business Insider</p>
+                </div>
+                <p>Profiled for my work in prediction markets.</p>
+                <a href="https://www.businessinsider.com/prediction-markets-13-year-old-eli-goldfine-2026-4" class="read-link">Read the feature →</a>
+            </div>
+            <div class="entry">
+                <div class="entry-heading">
+                    <h3>A 13-Year-Old Just Became Prediction Markets' Newest Guru</h3>
+                    <span class="date">2026</span>
+                    <p class="company">Briefs Finance</p>
+                </div>
+                <p>Profiled for my track record shorting overvalued candidates on prediction markets.</p>
+                <a href="https://www.briefs.co/news/a-13-year-old-just-became-prediction-markets-newest-guru/" class="read-link">Read the feature →</a>
+            </div>
+            <div class="entry">
+                <div class="entry-heading">
+                    <h3>14-Year-Old Forecaster Challenges My P(Doom)</h3>
+                    <span class="date">2026</span>
+                    <p class="company">Doom Debates (Liron Shapira)</p>
+                </div>
+                <p>Joined Liron Shapira to talk about AI risk and why assigning a specific probability to doom scenarios doesn't hold up.</p>
+                <a href="https://lironshapira.substack.com/p/14-year-old-prodigy-predicts-friendly-superintelligence" class="read-link">Listen to the interview →</a>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="footer">
+    <p>&copy; 2026 Eli Goldfine.</p>
+    <div class="social-links">
+        <a href="https://github.com/manifed" class="social-link">GitHub</a>
+        <a href="https://x.com/realTomBayes" class="social-link">X</a>
+        <a href="https://substack.com/@eligoldfine" class="social-link">Substack</a>
+        <a href="https://manifold.markets/realTomBayes" class="social-link">Manifold</a>
+        <a href="mailto:emgoldfine@gmail.com" class="social-link">Email</a>
     </div>
+</footer>
 
-    <!-- Main Site -->
-    <div id="mainSite" class="main-site">
-        <canvas id="dotsCanvas"></canvas>
-
-        <nav class="nav">
-            <div class="nav-brand">Eli Goldfine</div>
-        </nav>
-
-        <main class="content">
-            <section id="hero" class="section hero">
-                <img class="hero-photo" src="hero-portrait.png">
-                <h1>Hello, I'm <span class="highlight">Eli Goldfine</span></h1>
-                <p class="hero-subtitle">Exploring the cosmos, predicting the future, building with AI, attending high school.</p>
-                <a class="hero-email-button" href="mailto:emgoldfine@gmail.com">Email Me</a>
-                <a class="hero-email-button" href="https://x.com/realTomBayes">X/Twitter</a>
-            </section>
-
-            <section id="experience" class="section">
-                <h2 class="section-title">Experience</h2>
-                <div class="cards">
-                   <div class="card">
-                        <div class="card-header">
-                            <h3>New Media Fellow</h3>
-                            <span class="date">January 2027</span>
-                        </div>
-                        <p class="company">Andreessen Horowitz</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Intern</h3>
-                            <span class="date">July 2026 - Present</span>
-                        </div>
-                        <p class="company">MNX</p>
-                        <p>Working on the growth team for the company building the derivatives layer for the AI economy.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Writer</h3>
-                            <span class="date">February 2026 - Present</span>
-                        </div>
-                        <p class="company">The Supercycle</p>
-                        <p>Wrote some blog posts and did some podcasts about prediction markets. Find us at <a href=https://supercycle.blog>supercycle.blog</a></p>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Advisory Board</h3>
-                            <span class="date">2023 - Present</span>
-                        </div>
-                        <p class="company">Westchester Amateur Astronomers</p>
-                        <p>I've served on WAA's advisory board since 2023. 
-                            Over that time, I've revamped their website at 
-                            <a href=https://westchesterastronomers.org>westchesterastronomers.org</a>, planned events for the club, and organized large outreach events across Westchester County.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Associate Member</h3>
-                            <span class="date">2024 - Present</span>
-                        </div>
-                        <p class="company">Springfield Telescope Makers</p>
-                        <p>The Springfield Telescope Makers run the annual Stellafane Convention, known for leading the world in amateur telescope making since 1923.
-                            I've helped lead various events at convention and in 2024 I was nominated to be one of their ~100 members worldwide. </p>
-                    </div>
-                </div>
-            </section>
-
-            <section id="projects" class="section">
-                <h2 class="section-title">Stuff I've Done</h2>
-                <div class="cards">
-                <div class="card project-card">
-                    <h3>Founder, argue.lol</h3>
-                    <p>I created <a href=https://argue.lol>argue.lol</a>, a competitive AI debate arena.</p>
-                </div>
-                <div class="card project-card">
-                    <h3>Founder, Invariant Stuido</h3>
-                    <p>I created <a href=https://invariant.markets>Invariant Studio</a>, a platform to design and test Automated Market Makers.</p>
-                </div>
-                <div class="card project-card">
-                    <h3>Skyscope Restoration</h3>
-                    <p>I restored an ~80 year old Skyscope reflector, winning the Antique Restoration Award and First Place Junior award at the 87th Stellafane convention.</p>    
-                </div>
-                <div class="card project-card">
-                    <h3>GEM Telescope Restoration</h3>
-                    <p>I restored a home-built reflecting telescope on a German Equatorial Mount, winning the Special Award for a Junior Project at the 88th Stellafane convention.</p>
-                </div>
-                <div class="card project-card">
-                    <h3>ManiFed</h3>
-                    <p>Co-founded a P2P lending system and trading terminal for Manifold Markets with <a href="https://rjmccomb.xyz">Ryan McComb</a>.</p>
-                </div>
-                <div class="card project-card">
-                    <h3>Magnitude Zero</h3>
-                    <p>Wrote some blog posts about <a href=https://magnitudezero.substack.com>telescopes/astronomy</a>.</p>
-                </div>
-                <div class="card project-card">
-                    <h3>ScopeTrader</h3>
-                    <p>Wrote the cover story for a magazine with 120,000+ readers in <a href=https://scopetrader.com/magazine/november-2025>November '25</a>.</p>
-                </div>
-                <div class="card project-card">
-                    <h3>Journalism</h3>
-                    <p>An article I wrote for my middle school newspaper won second place in a national contest. It was an exposé on the markup the school's snack shop adds to the goods they obtain.</p>
-                </div>
-                </div>
-            </section>
-            
-            <section id="press" class="section">
-                <h2 class="section-title">Press</h2>
-                <div class="cards">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Featured in Business Insider</h3>
-                            <span class="date">2026</span>
-                        </div>
-                        <p class="company">Business Insider</p>
-                        <p>Profiled for my work in prediction markets.</p>
-                        <a href="https://www.businessinsider.com/prediction-markets-13-year-old-eli-goldfine-2026-4" target="_blank" class="read-link">Read the feature →</a>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>A 13-Year-Old Just Became Prediction Markets' Newest Guru</h3>
-                            <span class="date">2026</span>
-                        </div>
-                        <p class="company">Briefs Finance</p>
-                        <p>Profiled for my track record shorting overvalued candidates on prediction markets.</p>
-                        <a href="https://www.briefs.co/news/a-13-year-old-just-became-prediction-markets-newest-guru/" target="_blank" class="read-link">Read the feature →</a>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>14-Year-Old Forecaster Challenges My P(Doom)</h3>
-                            <span class="date">2026</span>
-                        </div>
-                        <p class="company">Doom Debates (Liron Shapira)</p>
-                        <p>Joined Liron Shapira to talk about AI risk and why assigning a specific probability to doom scenarios doesn't hold up.</p>
-                        <a href="https://lironshapira.substack.com/p/14-year-old-prodigy-predicts-friendly-superintelligence" target="_blank" class="read-link">Read the feature →</a>
-                    </div>
-                </div>
-            </section>
-
-            <footer class="footer">
-                <p>&copy; 2026 Eli Goldfine. All rights reserved.</p>
-                <div class="social-links">
-                    <a href="https://github.com/manifed" class="social-link">GitHub</a>
-                    <a href="https://x.com/realTomBayes" class="social-link">Twitter</a>
-                    <a href="https://substack.com/@eligoldfine" class="social-link">Substack</a>
-                    <a href="https://manifold.markets/realTomBayes" class="social-link">Manifold</a>
-                    <a href="mailto:emgoldfine@gmail.com" class="social-link">Email</a>
-                </div>
-            </footer>
-        </main>
-    </div>
-
-    <script src="observatory.js"></script>
-    <script src="script.js"></script>
+<dialog class="film" aria-label="Observatory short">
+    <canvas aria-hidden="true"></canvas>
+    <form method="dialog">
+        <button autofocus>Close film <span aria-hidden="true">×</span></button>
+    </form>
+</dialog>
 </body>
 </html>
